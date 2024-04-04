@@ -1,6 +1,5 @@
 from expense import Expense
 
-
 def main():
     print(f"- - - - - Running Expense Tracker! - - - - -")
 
@@ -43,10 +42,18 @@ def get_user_expense():
  
 
 def save_expense_to_file(expense: Expense, expense_file_path):
-    print(f"🎯 Saving User Expense: {expense} to {expense_file_path}")
+    print(f"🎯 Saving User Expense {expense} to {expense_file_path}")
     with open(expense_file_path, "a", encoding='utf-8') as f:
-        f.write(f"{expense.name}, {expense.amount}, {expense}\n")
+        f.write(f"{expense.name}, {expense.amount}, {expense.category}\n")
 
+def summarize_expense(expense_file_path):
+    print(f"🎯 Summarizing User Expense")
+    expenses = []
+    with open(expense_file_path, "r", encoding="utf-8") as f:
+        lines =f.readlines()
+        for line in lines:
+            expense_name, expense_amount, expense_category = line.strip().split(",")
+            print(expense_name, expense_amount, expense_category)
 
 
 # to make sure this main function runs only when we run this file , not as part of another file 
