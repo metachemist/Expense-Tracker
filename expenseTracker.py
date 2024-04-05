@@ -1,16 +1,18 @@
 from expense import Expense
+import datetime
+import calendar
 
 def main():
     print(f"- - - - - Running Expense Tracker! - - - - -")
 
     # Get User input for expense
-    expense = get_user_expense()
+    #expense = get_user_expense()
     # print(expense) debugging line to check whether get_user_expense is working correctly or not
     expense_file_path = "expense.csv"
     budget = 2000
 
-    # write their expense to a file 
-    save_expense_to_file(expense, expense_file_path)
+    #write their expense to a file 
+    #save_expense_to_file(expense, expense_file_path)
 
     # Read file and summarize expense
     summarize_expense(expense_file_path, budget) 
@@ -72,18 +74,29 @@ def summarize_expense(expense_file_path, budget):
         print(f"    {key}: ${amount:.2f}")
 
     total_spent = sum([x.amount for x in expense_list])
-    print(f"You've spent ${total_spent:.2f} this month")
+    print(f"🪙  You've spent ${total_spent:.2f} this month")
 
 
     # showing the budget
     remaining_budget = budget - total_spent
-    if remaining_budget > total_spent:
-        print(f"Hey you are got over budget by ${remaining_budget:.2f}")
+    if remaining_budget < 0:  
+        new_remaining_budget = abs(remaining_budget)
+        print(f"😟 Hey you are got over budget by ${new_remaining_budget:.2f}")
     else:
-        print(f"Your remaining budget ${remaining_budget:.2f}")
+        print(f"💵 Your remaining budget ${remaining_budget:.2f}")
+
+    # Get the current date
+    now =datetime.datetime.now() 
+
+    # Get the number of days in the current month
+    days_in_month = calendar.monthrange(now.year,now.month)[1]       
     
-# to make sure this main function runs only when we run this file , not as part of another file 
-# we put it into a condition 
-# this "__name__" is a special variable in python
-if __name__ == "__main__":
+    # Calculate the remaining number of days in the current month
+    remaining_days = days_in_month - now.day
+
+    print(f"Remaining days in the current month: {remaining_days}")
+
+
+# to make sure this main function runs only when we run this file , not as part of another file we put it into a condition 
+if __name__ == "__main__":      # this "__name__" is a special variable in python
     main()
