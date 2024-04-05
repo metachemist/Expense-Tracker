@@ -6,13 +6,13 @@ def main():
     print(f"- - - - - Running Expense Tracker! - - - - -")
 
     # Get User input for expense
-    #expense = get_user_expense()
+    expense = get_user_expense()
     # print(expense) debugging line to check whether get_user_expense is working correctly or not
     expense_file_path = "expense.csv"
     budget = 2000
 
     #write their expense to a file 
-    #save_expense_to_file(expense, expense_file_path)
+    save_expense_to_file(expense, expense_file_path)
 
     # Read file and summarize expense
     summarize_expense(expense_file_path, budget) 
@@ -93,10 +93,13 @@ def summarize_expense(expense_file_path, budget):
     
     # Calculate the remaining number of days in the current month
     remaining_days = days_in_month - now.day
+    # print(f"Remaining days in the current month: {remaining_days}")
 
-    print(f"Remaining days in the current month: {remaining_days}")
-
+    daily_budget = remaining_budget / remaining_days
+    print(f"💸 Budget per day: ${daily_budget:.2f}")
 
 # to make sure this main function runs only when we run this file , not as part of another file we put it into a condition 
 if __name__ == "__main__":      # this "__name__" is a special variable in python
     main()
+
+   
