@@ -5,4 +5,4 @@ class Expense:
         self.amount = amount
 
     def __repr__(self):
-        return f"{self.name}, {self.category}, ${self.amount: .2f}"
+        return f"<{self.name}, {self.category}, ${self.amount: .2f}>"
